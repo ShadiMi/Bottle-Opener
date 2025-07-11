@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot name="water_bottle_500ml">
+
+  <!-- ────────── BODY ────────── -->
+  <!-- PET bottle with screw-cap – all frames local, +90° about X -->
+
+<link name="body">
+  <inertial>
+    <origin xyz="0 0 0"/>
+    <mass value="0.024"/>
+    <inertia ixx="2.8e-4" iyy="2.8e-4" izz="4.6e-4"/>
+  </inertial>
+
+  <visual>
+    <origin xyz="0 0 0" />
+    <geometry>
+      <mesh filename="package://bottles/meshes/visual/plastic_body.obj"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" />
+    <geometry>
+      <mesh filename="package://bottles/meshes/collision/bottle_col.stl"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="cap">
+  <inertial>
+    <origin xyz="0 0 0.0120"/>
+    <mass value="0.003"/>
+    <inertia ixx="1e-6" iyy="1e-6" izz="2e-6"/>
+  </inertial>
+
+  <visual>
+    <origin xyz="0 0 0.0120"/>
+    <geometry>
+      <mesh filename="package://bottles/meshes/visual/plastic_cap.obj"/>
+    </geometry>
+    <material name="blue"><color rgba="0.1 0.25 0.8 1"/></material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0.0120"/>
+    <geometry>
+      <mesh filename="package://bottles/meshes/collision/cap_col.stl"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="cap_joint" type="revolute">
+  <parent link="body"/>
+  <child  link="cap"/>
+  <origin xyz="0 0 0.1020"/>
+  <axis   xyz="0 0 1"/>
+  <limit lower="-12.566" upper="0"
+         effort="0.3" velocity="4"/>
+</joint>
+
+
+</robot>
